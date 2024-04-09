@@ -1,0 +1,81 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Countries</title>
+    <style>
+        /* CSS to make the dropdown menu wider */
+        select {
+            width: 200px; /* Adjust the width as needed */
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Countries</h1>
+    <form action="/add" method="post">
+        <label for="start">Start Year (1970-2022):</label><br>
+        <input type="number" id="start" name="start" min="1970" max="2022" required><br><br>
+
+        <label for="end">End Year (1970-2022):</label><br>
+        <input type="number" id="end" name="end" min="1970" max="2022" required><br>
+        <span id="endYearError" style="color: red;"></span><br><br>
+
+        <label for="countries">Select Countries:</label><br>
+        <select name="countries" id="countries" multiple>
+            {% for country in countries %}
+            <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        function validateForm() {
+            var startYear = document.getElementById("start").value;
+            var endYear = document.getElementById("end").value;
+
+            if (parseInt(endYear) <= parseInt(startYear)) {
+                document.getElementById("endYearError").innerText = "End year must be after start year.";
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Countries</title>
+    <style>
+        /* CSS to make the dropdown menu wider */
+        select {
+            width: 200px; /* Adjust the width as needed */
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Countries</h1>
+    <form action="/add" method="post">
+        <label for="start">Start Year (1970-2022):</label><br>
+        <input type="number" id="start" name="start" min="1970" max="2022" required><br><br>
+
+        <label for="end">End Year (1970-2022):</label><br>
+        <input type="number" id="end" name="end" min="1970" max="2022" required><br><br>
+
+        <label for="countries">Select Countries:</label><br>
+        <select name="countries" id="countries" multiple>
+            {% for country in countries %}
+            <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
