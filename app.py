@@ -14,16 +14,6 @@ import os
 
 app = Flask(__name__, static_url_path='/static')
 
-def debug(test):
-    """
-    Debugging function to print information about the data being processed.
-
-    Parameters:
-    - test: The data to be printed for debugging.
-    """
-    print(f'\n\n\n*************THIS SECTION IS WORKING*************\n')
-    print(f'TEST: {test}, LEN:{len(test)}, TYPE:{type(test)}\n\n\n')
-
 def unfiltered():
     """
     Retrieve unfiltered data from a SQLite database table
@@ -138,7 +128,6 @@ def selected():
     years = list(range(start, end + 1))
     filtered_df = filtered(start, end)
     all_vals, data = process_data(countries, filtered_df, start, end)
-    debug(filtered_df)
 
     # Create traces for each country
     traces = []
