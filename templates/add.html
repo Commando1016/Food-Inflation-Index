@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +6,32 @@
     <title>Added Countries</title>
 </head>
 <body>
-    <h1>Added Countries</h1>
-    <img src="{{ url_for('static', filename='plot.png') }}" alt="Plot Image">
+    <h1>Country Inflation Data</h1>
+    <img src="{{ url_for('static', filename='figs/plot.png') }}" alt="Plot Image">
+    <br>
+    <p>Click <a href="{{ url_for('world_avgs') }}">here</a> to view the world averages.</p>
     <br>
     <a href="/">Back to Selection</a>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inflation Data</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h2>Inflation Data Plot</h2>
+    
+    <!-- Render the Plotly graph HTML -->
+    {{ graph_html | safe }}
+    <a href="/">Back to Selection</a>
+
+</body>
 </html>
+
+

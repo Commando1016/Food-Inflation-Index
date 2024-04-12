@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to CSS file -->
+</head>
+<body>
+    <h1>Select Countries</h1>
+    <form action="/add" method="post">
+        {% if start and end %}
+        <input type="hidden" name="start" value="{{ start }}">
+        <input type="hidden" name="end" value="{{ end }}">
+        {% endif %}
+        <label for="countries">Select Countries:</label><br>
+            <select name="countries" id="countries" multiple>
+                {% for country in countries %}
+                <option value="{{ country }}">{{ country }}</option>
+                {% endfor %}
+            </select><br><br>
+            <input type="submit" value="Submit">
+    </form>
+    <br>
+    <a href="/">Back to Selection</a>
+    
+</body>
+</html>

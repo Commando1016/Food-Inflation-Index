@@ -1,81 +1,29 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Countries</title>
-    <style>
-        /* CSS to make the dropdown menu wider */
-        select {
-            width: 200px; /* Adjust the width as needed */
-            height: 600px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Select Countries</h1>
-    <form action="/add" method="post">
-        <label for="start">Start Year (1970-2022):</label><br>
-        <input type="number" id="start" name="start" min="1970" max="2022" required><br><br>
-
-        <label for="end">End Year (1970-2022):</label><br>
-        <input type="number" id="end" name="end" min="1970" max="2022" required><br>
-        <span id="endYearError" style="color: red;"></span><br><br>
-
-        <label for="countries">Select Countries:</label><br>
-        <select name="countries" id="countries" multiple>
-            {% for country in countries %}
-            <option value="{{ country }}">{{ country }}</option>
-            {% endfor %}
-        </select><br><br>
-        <input type="submit" value="Submit">
-    </form>
-    <script>
-        function validateForm() {
-            var startYear = document.getElementById("start").value;
-            var endYear = document.getElementById("end").value;
-
-            if (parseInt(endYear) <= parseInt(startYear)) {
-                document.getElementById("endYearError").innerText = "End year must be after start year.";
-                return false; // Prevent form submission
-            }
-            return true; // Allow form submission
-        }
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Countries</title>
-    <style>
-        /* CSS to make the dropdown menu wider */
-        select {
-            width: 200px; /* Adjust the width as needed */
-            height: 600px;
-        }
-    </style>
+    <title>Select Years</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to CSS file -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Link to JavaScript file -->
+    
 </head>
 <body>
-    <h1>Select Countries</h1>
-    <form action="/add" method="post">
+    <h1>What is the Food Price Index?</h1>
+    <p>The Food Price Index (FPI) is a measure used to track changes in the price of a basket of food items over time. It typically includes various categories of food such as grains, dairy, meat, fruits, and vegetables. The index provides insight into overall food price inflation or deflation, which can be influenced by factors such as supply and demand dynamics, production costs, weather conditions, and government policies. The FPI is often used by policymakers, economists, and consumers to monitor trends in food affordability and to assess the impact of price changes on households and the broader economy.</p>
+    <h1>Select Years</h1>
+    <form action="/submit_years" method="post" onsubmit="return validateForm()">
         <label for="start">Start Year (1970-2022):</label><br>
         <input type="number" id="start" name="start" min="1970" max="2022" required><br><br>
 
         <label for="end">End Year (1970-2022):</label><br>
-        <input type="number" id="end" name="end" min="1970" max="2022" required><br><br>
+        <input type="number" id="end" name="end" min="1970" max="2022" required><br>
+        <span id="endYearError"></span><br><br>
 
-        <label for="countries">Select Countries:</label><br>
-        <select name="countries" id="countries" multiple>
-            {% for country in countries %}
-            <option value="{{ country }}">{{ country }}</option>
-            {% endfor %}
-        </select><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Filter Countries">
     </form>
+    <br>
+    <p>Click <a href="{{ url_for('world_avgs') }}">here</a> to view the world averages.</p>
+    <br>
 </body>
 </html>
-
