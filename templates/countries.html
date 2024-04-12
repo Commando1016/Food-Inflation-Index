@@ -13,7 +13,7 @@
         <input type="hidden" name="start" value="{{ start }}">
         <input type="hidden" name="end" value="{{ end }}">
         {% endif %}
-        <label for="countries">Select Countries:</label><br>
+        <label for="countries">Select Countries by holding the ctrl key:</label><br>
             <select name="countries" id="countries" multiple>
                 {% for country in countries %}
                 <option value="{{ country }}">{{ country }}</option>

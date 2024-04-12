@@ -14,16 +14,6 @@ import os
 
 app = Flask(__name__, static_url_path='/static')
 
-def create_directory_if_not_exists(directory):
-    """
-    Create a directory if it doesn't exist.
-
-    Parameters:
-    - directory: The path of the directory to create.
-    """
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
 def debug(test):
     """
     Debugging function to print information about the data being processed.
@@ -134,59 +124,6 @@ def submit_years():
     countries = filtered_df['Country'].to_list()
     return render_template('countries.html', countries=countries, start=start, end=end)
 
-# @app.route('/add', methods=['POST'])
-# def selected():
-#     """
-#     Handle the submission of selected countries from the form.
-
-#     Returns:
-#     The rendered HTML template with a plot of inflation data for selected countries.
-#     """
-#     countries = request.form.getlist('countries')
-#     start = request.form.get('start')
-#     end = request.form.get('end')
-#     years = list(range(int(start), int(end) + 1))
-#     filtered_df = filtered(start, end)
-#     all_vals, data = process_data(countries, filtered_df, start, end)
-#     debug(filtered_df)
-
-#     # Plot inflation data using Seaborn
-#     plt.figure(figsize=(13.5, 6))
-#     sns.set(style="whitegrid")  # Set the style to whitegrid
-#     for vals in all_vals:
-#         sns.lineplot(x=years, y=vals)
-
-#     # Customize tick marks on the x-axis
-#     ax = plt.gca()
-#     tick_locs = list(range(int(start), int(end) + 1, 3))
-#     if int(end) not in tick_locs:
-#         del tick_locs[-1]
-#         tick_locs.append(int(end))
-#     ax.xaxis.set_major_locator(ticker.FixedLocator(tick_locs))
-
-#     # Add legend with country names and average inflation
-#     legend_labels = [f'{c}: {avg}%' for c, avg in zip(data['Country'], data['Average Inflation'])]
-#     plt.legend(legend_labels, 
-#                title='Countries Average Inflation', 
-#                loc='upper right', 
-#                bbox_to_anchor=(1.25, 1.0))
-
-#     # Set titles and labels
-#     plt.title('Inflation Data by Year')
-#     plt.xlabel('Year')
-#     plt.ylabel('Inflation Percentage')
-
-#     # Set x-axis limits to start and end years
-#     plt.xlim(min(years), max(years))
-
-#     # Save the plot to a temporary file
-#     plot_path = 'static/figs/plot.png'
-#     plt.tight_layout()
-#     plt.savefig(plot_path)
-
-#     # Render the add.html template with the plot
-#     return render_template('add.html', plot_path=plot_path)
-
 @app.route('/add', methods=['POST'])
 def selected():
     """
@@ -247,11 +184,6 @@ def world_avgs():
         marker=dict(
             color=means,
             colorscale=colorscale,
-            # colorbar=dict(
-            #     title='Mean Value',
-            #     tickvals=means,
-            #     ticktext=[f'{mean:.2f}' for mean in means]
-            # )
         )
     )
 
@@ -289,8 +221,5 @@ def world_avgs():
     return render_template('world_avgs.html', graph_html=graph_html)
 
 if __name__ == '__main__':
-    # Create the directory for saving plot images if it doesn't exist
-    directory_path = 'static/figs'
-    create_directory_if_not_exists(directory_path)
     # Run the Flask app
     app.run(debug=True)
